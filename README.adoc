@@ -1,6 +1,6 @@
-= GUIDE_TITLE
+= Testing an ASP.NET Core web app
 
-This is sample code for [GUIDE_TITLE](https://testcontainers.com/guides/GUIDE_URL) Guide.
+This is sample code for [Testing an ASP.NET Core web app](https://testcontainers.com/guides/testing-an-aspnet-core-web-app) Guide.
 
 == 1. Setup Environment
 Make sure you have a [compatible Docker environment](https://www.testcontainers.org/supported_docker_environment/) installed.
