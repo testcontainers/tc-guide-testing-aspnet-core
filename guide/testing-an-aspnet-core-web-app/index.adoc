@@ -18,7 +18,7 @@ tags:
 In this guide you will learn how to
 
 * Use Testcontainers to spin up test dependencies
-* Replace a SQLite (in-memory) database with a Microsoft SQL Server
+* Replace SQLite with Microsoft SQL Server
 
 == Prerequisites
 
@@ -27,7 +27,7 @@ In this guide you will learn how to
 
 == What we are going to achieve in this guide
 
-The following section builds upon the knowledge we acquired in the Microsoft's guide. It explains how we can replace SQLite with a database provider that is used in production. This will help us to increase our confidence in our tests and to enable testing in an environment that closely resembles reality.
+The following section explains how we can replace SQLite with a database provider that is used in production. This will help us to increase our confidence in our tests and to enable testing in an environment that closely resembles reality.
 
 == Getting Started
 
@@ -39,6 +39,9 @@ cd AspNetCore.Docs.Samples/test/integration-tests/IntegrationTestsSample/tests/R
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.1.0
 dotnet add package Testcontainers.MsSql --version 3.0.0
 ----
+
+[NOTE]
+Testcontainers for .NET offers a range of https://www.nuget.org/profiles/Testcontainers[modules] that follow best practice configurations.
 
 Now that all dependencies have been set up, we can proceed to add another test class to the project. First, we will create a `MsSqlTests` class that will be responsible for configuring, creating, and starting the dependent Microsoft SQL Server container. The `MsSqlTests` class will contain a nested `IndexPageTests` class that will run the tests. This will allow us to access the private container field and follow a neat hierarchy in the test explorer.
 
@@ -102,7 +105,7 @@ public sealed class MsSqlTests : IAsyncLifetime
 ----
 
 [NOTE]
-The Microsoft SQL Server image is not compatible with Arm64 devices, you can use the https://www.nuget.org/packages/Testcontainers.SqlEdge[Testcontainers.SqlEdge] module instead.
+The Microsoft SQL Server Docker image is not compatible with ARM devices, such as Macs with Apple Silicon. Instead, you can use the https://www.nuget.org/packages/Testcontainers.SqlEdge[SqlEdge] module or https://www.testcontainers.cloud/[Testcontainers Cloud].
 
 Testcontainers modules are pre-configured and follow best practices acknowledged by many developers. Usually, you do not need to worry about configuring them yourself. All you need to do is to create a new container instance using `new MsSqlBuilder().Build()`. However, in some cases, it may be necessary to use your own configuration. In such cases, Testcontainers offers the generic builder `ContainerBuilder()`.
 
