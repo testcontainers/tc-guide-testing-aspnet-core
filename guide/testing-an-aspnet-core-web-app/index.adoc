@@ -17,13 +17,13 @@ tags:
 
 In this guide you will learn how to
 
-* Replace a SQLite (in-memory) database with a Microsoft SQL Server
 * Use Testcontainers to spin up test dependencies
+* Replace a SQLite (in-memory) database with a Microsoft SQL Server
 
 == Prerequisites
 
 * Testcontainers requires a Docker-API compatible container runtime.
-* This guide is built on top of Microsoft's guide [Integration tests in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-7.0). You will find Microsoft's code sample [here](https://github.com/dotnet/AspNetCore.Docs.Samples/tree/main/test/integration-tests/IntegrationTestsSample). Anything we learn in this guide is done on top of the referenced sources.
+* This guide is built on top of Microsoft's guide https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-7.0[Integration tests in ASP.NET Core]. You will find Microsoft's code sample https://github.com/dotnet/AspNetCore.Docs.Samples/tree/main/test/integration-tests/IntegrationTestsSample[here]. Anything we learn in this guide is done on top of the referenced sources.
 
 == What we are going to achieve in this guide
 
@@ -33,7 +33,7 @@ The following section builds upon the knowledge we acquired in the Microsoft's g
 
 Change to the `tests/RazorPagesProject.Tests` directory and install the `Microsoft.EntityFrameworkCore.SqlServer` and `Testcontainers.MsSql` NuGet dependency.
 
-[source,console]
+[source%nowrap,console]
 ----
 cd AspNetCore.Docs.Samples/test/integration-tests/IntegrationTestsSample/tests/RazorPagesProject.Tests
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.1.0
@@ -42,7 +42,7 @@ dotnet add package Testcontainers.MsSql --version 3.0.0
 
 Now that all dependencies have been set up, we can proceed to add another test class to the project. First, we will create a `MsSqlTests` class that will be responsible for configuring, creating, and starting the dependent Microsoft SQL Server container. The `MsSqlTests` class will contain a nested `IndexPageTests` class that will run the tests. This will allow us to access the private container field and follow a neat hierarchy in the test explorer.
 
-[source,csharp]
+[source%nowrap,csharp]
 ----
 public sealed class MsSqlTests : IAsyncLifetime
 {
@@ -102,17 +102,17 @@ public sealed class MsSqlTests : IAsyncLifetime
 ----
 
 [NOTE]
-The Microsoft SQL Server image is not compatible with Arm64 devices, you can use the [Testcontainers.SqlEdge](https://www.nuget.org/packages/Testcontainers.SqlEdge) module instead.
+The Microsoft SQL Server image is not compatible with Arm64 devices, you can use the https://www.nuget.org/packages/Testcontainers.SqlEdge[Testcontainers.SqlEdge] module instead.
 
 Testcontainers modules are pre-configured and follow best practices acknowledged by many developers. Usually, you do not need to worry about configuring them yourself. All you need to do is to create a new container instance using `new MsSqlBuilder().Build()`. However, in some cases, it may be necessary to use your own configuration. In such cases, Testcontainers offers the generic builder `ContainerBuilder()`.
 
-[xUnit.net](https://xunit.net) calls `IAsyncLifetime.InitializeAsync` immediately after the class has been created. Our test uses this mechanism to start the Microsoft SQL Server instance before any test run.
+https://xunit.net[xUnit.net] calls `IAsyncLifetime.InitializeAsync` immediately after the class has been created. Our test uses this mechanism to start the Microsoft SQL Server instance before any test run.
 
 The `IndexPageTests` class creates a custom instance of `WebApplicationFactory<TEntryPoint>`. Instead of adding a database context that relies on SQLite, we simply pass our Microsoft SQL Server connection string to `UseSqlServer(string)` to add a new database context. With Testcontainers, you can even shift this entire configuration to the web application entry point class and start dependent services together with your application.
 
 Now that the test class is ready, we can move the original tests to it. For example, copy the following test to our new `IndexPageTests` class and run the test against a Microsoft SQL Server instance:
 
-[source,csharp]
+[source%nowrap,csharp]
 ----
 [Fact]
 public async Task Post_DeleteAllMessagesHandler_ReturnsRedirectToRoot()
@@ -145,7 +145,7 @@ Please note that the first test run might take a few seconds longer since we nee
 
 By replacing SQLite with a database provider used in production, developers can further increase their confidence in their tests. The `MsSqlTests` class uses Testcontainers to configure, create and start a Microsoft SQL Server container, allowing the `IndexPageTests` class to test the application against the real database. This approach allows developers to test their application in a production-like environment and helps to identify issues early in the development cycle.
 
-To learn more about Testcontainers visit https://www.testcontainers.com
+To learn more about Testcontainers visit: https://www.testcontainers.com
 
 == Further Reading
 
