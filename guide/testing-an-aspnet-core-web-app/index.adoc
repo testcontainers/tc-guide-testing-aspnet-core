@@ -23,7 +23,7 @@ In this guide you will learn how to
 == Prerequisites
 
 * Testcontainers requires a Docker-API compatible container runtime.
-* This guide is built on top of Microsoft's guide https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-7.0[Integration tests in ASP.NET Core]. You will find Microsoft's code sample https://github.com/dotnet/AspNetCore.Docs.Samples/tree/main/test/integration-tests/IntegrationTestsSample[here]. Anything we learn in this guide is done on top of the referenced sources.
+* This guide is built on top of Microsoft's guide https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-7.0[Integration tests in ASP.NET Core]. You will find Microsoft's code sample https://github.com/dotnet/AspNetCore.Docs.Samples/tree/81d3e418e14f4bef38272f5a468446529909f836/test/integration-tests/IntegrationTestsSample[here]. Anything we learn in this guide is done on top of the referenced sources.
 
 == What we are going to achieve in this guide
 
