@@ -1,8 +1,9 @@
 = Testing an ASP.NET Core web app
 
-This is sample code for [Testing an ASP.NET Core web app](https://testcontainers.com/guides/testing-an-aspnet-core-web-app) Guide.
+This is sample code for [Testing an ASP.NET Core web app](https://testcontainers.com/guides/testing-an-aspnet-core-web-app) guide.
 
 == 1. Setup Environment
+
 Make sure you have .NET 7 and a [compatible Docker environment](https://www.testcontainers.org/supported_docker_environment/) installed.
 
 For example:
@@ -29,6 +30,7 @@ Server: Docker Desktop 4.12.0 (85629)
 git clone https://github.com/testcontainers/tc-guide-testing-aspnet-core.git
 cd tc-guide-testing-aspnet-core
 ----
+
 * Open the **tc-guide-testing-aspnet-core** project in your favorite IDE.
 
 == 3. Run Tests
